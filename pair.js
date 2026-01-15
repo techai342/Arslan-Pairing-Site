@@ -6,7 +6,7 @@ const fs = require('fs');
 let router = express.Router();
 const pino = require('pino');
 const {
-    default: Arslan_Tech,
+    default: sSAQIB_Tech,
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
     async function Arslan_MD_PAIR_CODE() {
         const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
         try {
-            let Pair_Code_By_Arslan_Tech = Arslan_Tech({
+            let Pair_Code_By_Arslan_Tech = SAQIB_Tech({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'fatal' }).child({ level: 'fatal' })),
@@ -38,13 +38,13 @@ router.get('/', async (req, res) => {
             if (!Pair_Code_By_Arslan_Tech.authState.creds.registered) {
                 await delay(1500);
                 num = num.replace(/[^0-9]/g, '');
-                const code = await Pair_Code_By_Arslan_Tech.requestPairingCode(num);
+                const code = await Pair_Code_By_SAQIB_Tech.requestPairingCode(num);
                 if (!res.headersSent) {
                     await res.send({ code });
                 }
             }
 
-            Pair_Code_By_Arslan_Tech.ev.on('creds.update', saveCreds);
+            Pair_Code_By_SAQIB_Tech.ev.on('creds.update', saveCreds);
             Pair_Code_By_Arslan_Tech.ev.on('connection.update', async (s) => {
                 const { connection, lastDisconnect } = s;
                 if (connection === 'open') {
@@ -52,34 +52,34 @@ router.get('/', async (req, res) => {
                     let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
                     await delay(800);
                     let b64data = Buffer.from(data).toString('base64');
-                    let session = await Pair_Code_By_Arslan_Tech.sendMessage(Pair_Code_By_Arslan_Tech.user.id, { text: 'ARSLAN-MD~' + b64data });
+                    let session = await Pair_Code_By_SAQIB_Tech.sendMessage(Pair_Code_By_SAQIB_Tech.user.id, { text: 'SAQIB-MD~' + b64data });
 
-                    let Arslan_MD_TEXT = `
+                    let SAQIB_MD_TEXT = `
         
 ╔════════════════════◇
 ║『 SESSION CONNECTED』
-║ ✨ Arslan-MD 🔷
-║ ✨ ArslanMD OFFICIAL🔷
+║ ✨ SAQIB-MD 🔷
+║ ✨ SAQIBMD OFFICIAL🔷
 ╚════════════════════╝
 
 
 ---
 
 ╔════════════════════◇
-║『 YOU'VE CHOSEN Arslan-MD 』
+║『 YOU'VE CHOSEN SAQIB-MD 』
 ║ -Set the session ID in Heroku:
 ║ - SESSION_ID: 
 ╚════════════════════╝
 ╔════════════════════◇
 ║ 『••• _V𝗶𝘀𝗶𝘁 𝗙𝗼𝗿_H𝗲𝗹𝗽 •••』
-║❍ 𝐎𝐰𝐧𝐞𝐫: 923237045919
+║❍ 𝐎𝐰𝐧𝐞𝐫: 447546717496
 ║❍ 𝐑𝐞𝐩𝐨: https://github.com/Arslan-MD/Arslan_MD
 ║❍ 𝐖𝐚𝐆𝗿𝐨𝐮𝐩: https://chat.whatsapp.com/KRyARlvcUjoIv1CPSSyQA5?mode=wwt
-║❍ 𝐖𝐚𝐂𝐡𝐚𝐧𝐧𝐞𝐥: https://whatsapp.com/channel/0029VarfjW04tRrmwfb8x306
+║❍ 𝐖𝐚𝐂𝐡𝐚𝐧𝐧𝐞𝐥: https://whatsapp.com/channel/0029Vb6bvtX3wtb21mil503V
 ║
 ║ ☬ ☬ ☬ ☬
 ╚═════════════════════╝
-𒂀 Enjoy Arslan-MD
+𒂀 Enjoy saqib-MD
 
 
 ---
@@ -87,7 +87,7 @@ router.get('/', async (req, res) => {
 Don't Forget To Give Star⭐ To My Repo
 ______________________________`;
 
-                    await Pair_Code_By_Arslan_Tech.sendMessage(Pair_Code_By_Arslan_Tech.user.id, { text: Toxic_MD_TEXT }, { quoted: session });
+                    await Pair_Code_By_SAQIB_Tech.sendMessage(Pair_Code_By_Arslan_Tech.user.id, { text: Toxic_MD_TEXT }, { quoted: session });
 
                     await delay(100);
                     await Pair_Code_By_Arslan_Tech.ws.close();
@@ -106,7 +106,7 @@ ______________________________`;
         }
     }
     
-    return await Arslan_MD_PAIR_CODE();
+    return await SAQIB_MD_PAIR_CODE();
 });
 
 module.exports = router;
